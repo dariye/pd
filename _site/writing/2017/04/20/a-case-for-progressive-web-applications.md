@@ -7,10 +7,7 @@
 Towards the start of 2016, Progressive Web Applications (PWAs) became a really hot topic all over the interweb, as you can see [here](https://addyosmani.com/blog/getting-started-with-progressive-web-apps/), [here](https://auth0.com/blog/introduction-to-progressive-apps-part-one/), [here](https://infrequently.org/2015/06/progressive-apps-escaping-tabs-without-losing-our-soul/), [here](https://www.smashingmagazine.com/2016/08/a-beginners-guide-to-progressive-web-apps/), or and [here](https://developers.google.com/web/progressive-web-apps/). Even your run of the mill [Google search](https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=progressive%20web%20applications) returns a staggering amount of chatter:
 
 
-<div class="img-container full">
-![Google Web Search for ‘progressive web applications’][google-search-result]
-</div>
-*Google Web Search for ‘progressive web applications’*
+![Google Web Search for progressive web applications’](google-search-result.png)
 
 In this post I’ll talk about why progressive enhancements are good for you, your customers, and your business especially if you have operations in emerging markets. I’ll then show you three quick wins to help you on the path to adopting progressive enhancements into web applications going forward.
 
@@ -101,10 +98,7 @@ Finally, as developing countries become prime investment destinations, infrastru
 Even with these existing problems, there’s still an immense opportunity for growth. Three quarters of people have still yet to come online, and the platforms, services and apps they adopt are going to be the ones that are best configured for their network and device realities.
 
 
-![Global Internet Usage. Source: ITU](global-internet-usage.png)
-
-*Global Internet Usage. Source: ITU*
-
+![Global Internet Usage. Source: ITU]({{ relativePath }}/global-internet-usage.png)
 
 **What does all these mean for you, your customers, and your business?**
 
@@ -209,11 +203,3 @@ use cases going forward.**
 - *Note: Browser support: Chief among the reason people shy away from progressive enhancement is the [lack of support by some major browser vendors](https://jakearchibald.github.io/isserviceworkerready/), Apple being the elephant in the room.*
 - *Acknowledgement: Huge thanks to my colleagues on the Andela Marketing & Technology teams for reviewing and proofreading this piece.*
 - *Crossposting: You can find this piece on [Andela's Medium Technology Publication](https://medium.com/technology-learning/a-case-for-progressive-web-applications-in-2017-dafb5957e783)*
-
-[google-search-result]: ../img/google-search-result.png "Google Web Search for ‘progressive web applications’"
-[mobile-network-coverage-and-evolving-technologies]: ../img/mobile-network-coverage-and-evolving-technologies.png "Mobile network coverage and evolving technologies. Source: ITU"
-[global-smartphone-sales]: /assets/global-smartphone-sales.png "Global Smartphone Sales. Source: Gartner"
-[fixed-and-mobile-broadband-pricing]: /assets/fixed-and-mobile-broadband-pricing.png "Fixed- and mobile-broadband prices, $$$. Source: ITU"
-[opensignal-fragmentation-report]: assets/opensignal-fragmentation-report.png "Android OS Fragmentation by Device. Source: OpenSignal"
-[global-internet-usage]: {{ assetPath }}/global-internet-usage.png "Global Internet Coverage. Source: ITU"
-

@@ -41,18 +41,16 @@ showdown.setFlavor('github')
 
 const relativePathExtension = function (path) {
   const self = this
-  console.log('hihi', path)
-  this.path = path || '/'
+  this.relativePath = path || '/'
   this.extension = function () {
     return [
       {
         type: 'lang',
-        regex: /\{\{assetPath\}\}/g,
-        replace: function (wm, theVar) {
+        regex: /\{\{([\s\S]+)\}\}/g,
+        replace: function (wholematch, match) {
           let otp = ''
-          console.log(wm)
-          if (theVar.trim() === 'assetPath') {
-            opt = self.path
+          if (match.trim() === 'relativePath') {
+            otp = self.relativePath
           }
           return otp
         }
@@ -187,8 +185,7 @@ const getAsset = async assetPath => {
 
 const toHtml = async (dirPath, filePath) => {
   const file = await toPromise(fs.readFile)(filePath, 'utf8')
-  relativeExtension.path = dirPath
-  console.log(relativeExtension)
+  relativeExtension.relativePath = dirPath.replace('_site', '')
   if (file) return converter.makeHtml(file)
 }
 
