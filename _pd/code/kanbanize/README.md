@@ -4,6 +4,8 @@
 
 This is a fairly simple and extensible kanban power-up for GitHub Projects that automates the triaging of new issues to project boards and to track issue statuses automatically
 
+<div style="width:100%;height:0;padding-bottom:53%;position:relative;"><iframe src="https://giphy.com/embed/1d5O0w2mSW3Rglpjrk" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/github-project-management-1d5O0w2mSW3Rglpjrk">via GIPHY</a></p>
+
 ## Features
 
 - Move a project card along the board automatically.
