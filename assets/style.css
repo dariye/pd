@@ -34,6 +34,15 @@ a:focus {
   margin: -1px;
 }
 
+.pd {
+  color: #000;
+  text-decoration: underline
+}
+
+.pd:hover, .pd:visited, .pd:focus {
+ color: #000;
+}
+
 img {
   height: auto;
   max-width: 100%;
