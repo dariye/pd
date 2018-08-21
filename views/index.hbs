@@ -4,6 +4,7 @@
   <title>{{#if page.title}}{{page.title}}{{else}}{{folder}}{{/if}}</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="google-site-verification" content="IhRUY-Jjf8wZGfZ_VMf4QitMQVs-Yz-DkPJzb5iIwDc" />
   <meta name="canonical" content="{{page.canonical}}" />
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -55,9 +56,17 @@
   <footer>
     <p><a href="/" class="pd">pauldariye.com</a> (<a
                    href="https://github.com/pauldariye/pd"
-                   target="_blank">src</a>)</p>
+                   target="_blank" class="pd">src</a>)</p>
     <p>&copy; {{year}}</p>
   </footer>
+ <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-42124629-3', 'auto');
+    ga('send', 'pageview');
+  </script>
   <script type="text/javascript" src="{{assetsDir}}/app.js"></script>
 </body>
 </html>
