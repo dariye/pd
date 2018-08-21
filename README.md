@@ -6,7 +6,7 @@ The inspiration for this comes from the native behavior you get when deploying
 static directories using [`now`](https://zeit.co/now). Under the hood, they make
 use of the [`serve`](https://github.com/zeit/serve) library.
 
-I reused a lot of the code from this awesome library [`micro-gallery`](https://github.com/andreasmcdermott/micro-gallery). Inspiration also came from @rauchg's blog and work with the [Zeit](https://zeit.co) team.
+I reused a lot of the code from this awesome library [`micro-gallery`](https://github.com/andreasmcdermott/micro-gallery). Inspiration also came from @rauchg 's blog and work with the [Zeit](https://zeit.co) team.
 
 Check out other awesome things others have built using
 [`micro`](https://github.com/amio/awesome-micro).
@@ -51,7 +51,7 @@ Posts are generated on the fly from any file in a directory with the `.md` exten
 
 ## Future plan
 
-Just like @andreasmcdermott's [`micro-gallery`](https://github.com/andreasmcdermott/micro-gallery) lib, I would like to make this a tool available to anyone. The goal is to be able to host a site like mine on pretty much any environment that supports `markdown`. Just like my site, you will be able to read your blog posts on GitHub, the web, or any place else. I would like to call it `micro-site`.
+Just like @andreasmcdermott 's [`micro-gallery`](https://github.com/andreasmcdermott/micro-gallery) lib, I would like to make this a tool available to anyone. The goal is to be able to host a site like mine on pretty much any environment that supports `markdown`. Just like my site, you will be able to read your blog posts on GitHub, the web, or any place else. I would like to call it `micro-site`.
 
 ## Acknowledgements
 - [`micro-gallery`](https://github.com/andreasmcdermott/micro-gallery)
