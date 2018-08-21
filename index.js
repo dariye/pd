@@ -1,20 +1,22 @@
 /**
  * TODO
- * 1. Add zip file download for oss (with hover animation for download or share?)
- * 2. Update styles for posts
- * 3. Add image rendering for posts
- * 4. Migrate all content from blog.pauldariye.com
- * 5. Add night theme
- * 6. Add progress indicator for posts
- * 7. Add view counter
- * 8. Add ga
- * 9. a11y
- * 10. audio/media/image styles --- keep it simple .. black/white/monotone --
+ * [] Add zip file download for oss (with hover animation for download or share?)
+ * [x] Update styles for posts
+ * [x] Add image rendering for posts
+ * [x] Migrate all content from blog.pauldariye.com
+ * [] Add night theme
+ * [x] Add progress indicator for posts
+ * [x] Add view counter
+ * [] Add ga
+ * [] a11y
+ * [] audio/media/image styles --- keep it simple .. black/white/monotone --
  * futuristic
- * 11. serviceworkers
- * 12. lru-cache
- * 13. SEO
- * 14. add twitter, github, icons
+ * [] serviceworkers
+ * [x] lru-cache
+ * [] SEO
+ * [] add twitter, github, icons
+ * [] Code snippet copy to clipboard
+ * [] Add hearts
  */
 
 const fs = require('fs')
@@ -28,16 +30,14 @@ const handlebars = require('handlebars')
 const showdown = require('showdown')
 const twitter = require('showdown-twitter')
 const youtube = require('showdown-youtube')
-const prettify = require('showdown-prettify')
 const hljs = require('highlight.js')
+const unslug = require('unslug')
 const LRUCache = require('lru-cache')
 
 const ssrCache = new LRUCache({
   max: 100,
   maxAge: 1000 * 60 * 60
 })
-
-showdown.setFlavor('github')
 
 const relativePathExtension = function (path) {
   const self = this
@@ -46,13 +46,9 @@ const relativePathExtension = function (path) {
     return [
       {
         type: 'lang',
-        regex: /\{\{([\s\S]+)\}\}/g,
-        replace: function (wholematch, match) {
-          let otp = ''
-          if (match.trim() === 'relativePath') {
-            otp = self.relativePath
-          }
-          return otp
+        filter: function (text) {
+          const data = { relativePath: self.relativePath }
+          return handlebars.compile(text)(data)
         }
       }
     ]
@@ -62,7 +58,7 @@ const relativePathExtension = function (path) {
 const relativeExtension = new relativePathExtension()
 showdown.extension('relative', relativeExtension.extension)
 
-showdown.extension('highlight', function() {
+showdown.extension('codehighlight', function() {
   function htmlunencode(text) {
     return (
       text
@@ -88,38 +84,30 @@ showdown.extension('highlight', function() {
       }
     }
   ];
-})
+});
+
 const converter = new showdown.Converter({
-  omitExtraWLInCodeBlocks: true,
-  ghCompatibleHeaderId: true,
-  parseImgDimensions: true,
-  simplifiedAutoLink: true,
-  excludeTrailingPunctuationFromURLs: true,
-  strikethrough: true,
-  tables: true,
-  ghCodeBlocks: true,
-  tasklists: true,
-  smoothLivePreview: true,
-  smartIndentationFix: true,
-  disableForced4SpacesIndentedSublists: true,
-  simpleLineBreaks: true,
-  requireSpaceBeforeHeadingText: true,
-  ghMentions: true,
+  parseImageDimension: true,
+  encodeEmails: true,
   openLinksInNewWindow: true,
-  emoji: true,
-  splitAdjacentBlockquotes: true,
-  // youtubeHeight: '',
-  // youtubeWidth: '',
-  youtubeUseSimpleImg: true,
-  extensions: ['twitter', 'youtube', 'prettify', 'highlight', 'relative']
+  smartIndentationFix: true,
+  smoothLivePreview: true,
+  excludeTrailingPunctuationFromURLs: true,
+  tasklists: true,
+  disableForced4SpacesIndentedSublists: true,
+  requireSpaceBeforeHeadingText: true,
+  extensions: ['youtube', 'relative', 'codehighlight']
 })
+converter.setFlavor('github')
+
 /**
  * Handlebar helpers
  */
 handlebars.registerHelper('year', () => new Date().getFullYear())
 
 const defaultPort = 3000
-const validExtensions = new Set([
+
+const imageExtensions = new Set([
   '.jpeg',
   '.jpg',
   '.png',
@@ -127,11 +115,17 @@ const validExtensions = new Set([
   '.bmp',
   '.tiff',
   '.tif',
-  '.ico'
+  '.ico',
+  '.svg'
 ])
 
-const ignoredFiles = new Set(['.git', '.DS_Store', '_src'])
-const root = path.resolve(process.cwd(), '_site')
+const downloadExtensions = new Set([
+  '.zip',
+  '.pdf'
+])
+
+const ignoredFiles = new Set(['.git', '.DS_Store', '404', '500', 'pdbot'])
+const root = path.resolve(process.cwd(), '_pd')
 const rootObj = path.parse(root)
 const isDirectory = async directory => {
   try {
@@ -185,7 +179,7 @@ const getAsset = async assetPath => {
 
 const toHtml = async (dirPath, filePath) => {
   const file = await toPromise(fs.readFile)(filePath, 'utf8')
-  relativeExtension.relativePath = dirPath.replace('_site', '')
+  relativeExtension.relativePath = dirPath.replace(rootObj.name, '')
   if (file) return converter.makeHtml(file)
 }
 
@@ -211,10 +205,11 @@ const renderDir = async directory => {
   const data = {
     directories: [],
     images: [],
+    downloads: [],
     path: [],
-    content: null,
+    page: {},
     assetsDir: '/assets',
-    folder: dirObj.name
+    folder: dirObj.name,
   }
 
   let url = []
@@ -231,6 +226,8 @@ const renderDir = async directory => {
   for (let i = 0; i < files.length; ++i) {
     if (ignoredFiles.has(files[i])) continue
     const filePath = path.resolve(root, path.resolve(directory, files[i]))
+    const pathObj = path.parse(filePath)
+
     const relativeFilePath = path.relative(
       root,
       path.resolve(directory, files[i])
@@ -240,11 +237,19 @@ const renderDir = async directory => {
         relative: relativeFilePath,
         name: files[i]
       })
-    } else if (isMarkdown(path.parse(filePath))) {
-      data.content = await toHtml(dirPath, filePath)
-    } else if (validExtensions.has(path.parse(filePath).ext)) {
+    } else if (isMarkdown(pathObj)) {
+      data.page.title = unslug(pathObj.name)
+      data.page.canonical = `${dirPath.replace(rootObj.name, '')}/${pathObj.name}`
+      data.page.content = await toHtml(dirPath, filePath)
+    } else if (imageExtensions.has(pathObj.ext)) {
       data.images.push({
         relative: relativeFilePath,
+        name: files[i]
+      })
+    } else if (downloadExtensions.has(pathObj.ext)) {
+      data.downloads.push({
+        relative: relativeFilePath,
+        extension: pathObj.ext.replace('.', ''),
         name: files[i]
       })
     }
@@ -255,7 +260,7 @@ const renderDir = async directory => {
   return enriched
 }
 
-const renderImage = async file => {
+const renderFile = async file => {
   try {
     const content = await toPromise(fs.readFile)(path.resolve(root, file))
     return {
@@ -279,21 +284,42 @@ module.exports = async (req, res) => {
   }
 
   if (!await exists(reqPath)) {
-    return send(res, 404, 'Not Found') // Render 404
+    const pathObj = path.parse(path.join(root, '/404'))
+    const reqPath = decodeURIComponent(path.format(pathObj))
+    const renderedDir = await renderDir(reqPath)
+    return send(res, 404, renderedDir)
   }
 
   if (pathObj.ext === '') {
     const renderedDir = await renderDir(reqPath)
     return send(res, 200, renderedDir)
-  } else if (validExtensions.has(pathObj.ext)) {
+  } else if (imageExtensions.has(pathObj.ext)) {
     try {
-      const image = await renderImage(reqPath)
+      const image = await renderFile(reqPath)
       res.setHeader('Content-Type', `${image.mime}; charset=utf-8`)
       return send(res, 200, image.content)
     } catch(err) {
-      return send(res, 500, 'Error reading file content') // render 500
+      const pathObj = path.parse(path.join(root, '/500'))
+      const reqPath = decodeURIComponent(path.format(pathObj))
+      const renderedDir = await renderDir(reqPath)
+      return send(res, 500, renderedDir)
+    }
+  } else if (downloadExtensions.has(pathObj.ext)) {
+    try {
+      const download = await renderFile(reqPath)
+      res.setHeader('Content-disposition', `attachment; filename=${pathObj.name}${pathObj.ext}`)
+      res.setHeader('Content-Type', `${download.mime}`)
+      return send(res, 200, download.content)
+    } catch(err) {
+      const pathObj = path.parse(path.join(root, '/500'))
+      const reqPath = decodeURIComponent(path.format(pathObj))
+      const renderedDir = await renderDir(reqPath)
+      return send(res, 500, renderedDir)
     }
   } else {
-    return send(res, 400, 'Bad request') // Render 400
+    const pathObj = path.parse(path.join(root, '/500'))
+    const reqPath = decodeURIComponent(path.format(pathObj))
+    const renderedDir = await renderDir(reqPath)
+    return send(res, 500, renderedDir)
   }
 }

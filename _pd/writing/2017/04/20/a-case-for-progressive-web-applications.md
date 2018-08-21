@@ -1,4 +1,5 @@
 # A Case for Progressive Web Applications
+
 > TL;DR — If your company is or is planning on doing business in emerging markets, architecting your web applications for performance through progressive enhancements is one easy way to drastically improve accessibility, retention, and user experience.
 
 *Disclaimer: It so happens that not only people in emerging markets suffer from poor networks.*
@@ -7,7 +8,8 @@
 Towards the start of 2016, Progressive Web Applications (PWAs) became a really hot topic all over the interweb, as you can see [here](https://addyosmani.com/blog/getting-started-with-progressive-web-apps/), [here](https://auth0.com/blog/introduction-to-progressive-apps-part-one/), [here](https://infrequently.org/2015/06/progressive-apps-escaping-tabs-without-losing-our-soul/), [here](https://www.smashingmagazine.com/2016/08/a-beginners-guide-to-progressive-web-apps/), or and [here](https://developers.google.com/web/progressive-web-apps/). Even your run of the mill [Google search](https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=progressive%20web%20applications) returns a staggering amount of chatter:
 
 
-![Google Web Search for progressive web applications’](google-search-result.png)
+![Google Web Search for ‘progressive web applications’][google-search-result]
+*Google Web Search for ‘progressive web applications’*
 
 In this post I’ll talk about why progressive enhancements are good for you, your customers, and your business especially if you have operations in emerging markets. I’ll then show you three quick wins to help you on the path to adopting progressive enhancements into web applications going forward.
 
@@ -51,42 +53,31 @@ According to [Forbes](https://www.forbes.com/pictures/eglg45gdjd/emerging-market
 **Accessibility**, as I pointed out earlier, is one of the core tenets of a PWA. Even with the proliferation of the mobile cellular networks over the last few years (as shown in diagram), accessibility continues to remain an issue especially for internet users, particularly ones in emerging markets who are still remanded to slower networks than the developed world.
 
 
-<div class="img-container full">
 ![Mobile network coverage and evolving technologies. Source: ITU][mobile-network-coverage-and-evolving-technologies]
-</div>
 *Mobile network coverage and evolving technologies. Source: ITU*
-
 
 The unique accessibility problem PWAs can be configured to solve is a combination of factors including cost (2x the monthly cost of a person in a developed country), device fragmentation (mostly an Android issue), and availability of better network options (i.e 3G, 4G, or LTE).
 
 The high cost of cellular data forces mobile users to access applications that consume as little data as possible (which is why WhatsApp is so popular in emerging markets) and for much shorter durations. I’ve personally experienced this while browsing Facebook in Nigeria: I ran through over 3GB of data in two days.
 
 
-<div class="img-container full">
 ![Fixed- and mobile-broadband prices, $$$. Source: ITU][fixed-and-mobile-broadband-pricing]
-</div>
 *Fixed- and mobile-broadband prices, $$$. Source: ITU*
-
 
 However, the cost of cellular data will continue to drop as the technology matures and as more suppliers compete for market dominance in emerging markets.
 
 The next big issue is the fragmentation of the mobile device market, which is especially true in Android-dominated emerging markets:
 
 
-<div class="img-container full">
 ![Global Smartphone Sales. Source: Gartner][global-smartphone-sales]
-</div>
 *Global Smartphone Sales. Source: Gartner*
-
 
 For Android, fragmentation has been a bittersweet pill. On one hand, consumers have access to thousands of devices, in all shapes and sizes, price tiers, colors, different performance, whatever. On the other, developers and product teams are stuck in a awkward place, unsure of which screen size or performance benchmark to build their applications against.
 
 Here’s an example of just how big the problem is:
 
 
-<div class="img-container full">
 ![Android OS Fragmentation by Device. Source: OpenSignal][opensignal-fragmentation-report]
-</div>
 *Android OS Fragmentation by Device. Source: OpenSignal*
 
 
@@ -98,7 +89,8 @@ Finally, as developing countries become prime investment destinations, infrastru
 Even with these existing problems, there’s still an immense opportunity for growth. Three quarters of people have still yet to come online, and the platforms, services and apps they adopt are going to be the ones that are best configured for their network and device realities.
 
 
-![Global Internet Usage. Source: ITU]({{ relativePath }}/global-internet-usage.png)
+![Global Internet Usage. Source: ITU][global-internet-usage]
+*Global Internet Usage. Source: ITU*
 
 **What does all these mean for you, your customers, and your business?**
 
@@ -203,3 +195,10 @@ use cases going forward.**
 - *Note: Browser support: Chief among the reason people shy away from progressive enhancement is the [lack of support by some major browser vendors](https://jakearchibald.github.io/isserviceworkerready/), Apple being the elephant in the room.*
 - *Acknowledgement: Huge thanks to my colleagues on the Andela Marketing & Technology teams for reviewing and proofreading this piece.*
 - *Crossposting: You can find this piece on [Andela's Medium Technology Publication](https://medium.com/technology-learning/a-case-for-progressive-web-applications-in-2017-dafb5957e783)*
+
+[google-search-result]: {{{relativePath}}}/google-search-result.png "Google Web Search for ‘progressive web applications’"
+[mobile-network-coverage-and-evolving-technologies]: {{{relativePath}}}/mobile-network-coverage-and-evolving-technologies.png "Mobile network coverage and evolving technologies. Source: ITU"
+[global-smartphone-sales]: {{{relativePath}}}/global-smartphone-sales.png "Global Smartphone Sales. Source: Gartner"
+[fixed-and-mobile-broadband-pricing]: {{{relativePath}}}/fixed-and-mobile-broadband-pricing.png "Fixed- and mobile-broadband prices, $$$. Source: ITU"
+[opensignal-fragmentation-report]: {{{relativePath}}}/opensignal-fragmentation-report.png "Android OS Fragmentation by Device. Source: OpenSignal"
+[global-internet-usage]: {{{relativePath}}}/global-internet-usage.png "Global Internet Coverage. Source: ITU"

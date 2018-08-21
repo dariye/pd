@@ -1,11 +1,11 @@
 Arguments: 
-  /Users/pd/.nvm/versions/node/v9.4.0/bin/node /usr/local/Cellar/yarn/1.7.0/libexec/bin/yarn.js add showdown-toc
+  /Users/pd/.nvm/versions/node/v9.4.0/bin/node /usr/local/Cellar/yarn/1.9.4/libexec/bin/yarn.js add showdown-toc shadow-footnotes
 
 PATH: 
   /Users/pd/.bin:/Users/pd/.nvm/versions/node/v9.4.0/bin:/Users/pd/.rbenv/shims:/Users/pd/.rbenv/bin:/usr/local/bin:.git/safe/../../bin:/Users/pd/.asdf/bin:/Users/pd/.asdf/shims:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/MacGPG2/bin:/Applications/Wireshark.app/Contents/MacOS
 
 Yarn version: 
-  1.7.0
+  1.9.4
 
 Node version: 
   9.4.0
@@ -15,12 +15,12 @@ Platform:
 
 Trace: 
   Error: https://registry.yarnpkg.com/showdown-toc: Not found
-      at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.7.0/libexec/lib/cli.js:65656:18)
-      at Request.self.callback (/usr/local/Cellar/yarn/1.7.0/libexec/lib/cli.js:134675:22)
+      at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.9.4/libexec/lib/cli.js:64202:18)
+      at Request.self.callback (/usr/local/Cellar/yarn/1.9.4/libexec/lib/cli.js:137468:22)
       at Request.emit (events.js:160:13)
-      at Request.<anonymous> (/usr/local/Cellar/yarn/1.7.0/libexec/lib/cli.js:135658:10)
+      at Request.<anonymous> (/usr/local/Cellar/yarn/1.9.4/libexec/lib/cli.js:138440:10)
       at Request.emit (events.js:160:13)
-      at IncomingMessage.<anonymous> (/usr/local/Cellar/yarn/1.7.0/libexec/lib/cli.js:135578:12)
+      at IncomingMessage.<anonymous> (/usr/local/Cellar/yarn/1.9.4/libexec/lib/cli.js:138362:12)
       at Object.onceWrapper (events.js:255:19)
       at IncomingMessage.emit (events.js:165:20)
       at endReadableNT (_stream_readable.js:1101:12)
@@ -41,6 +41,7 @@ npm manifest:
       "denodeify": "^1.2.1",
       "handlebars": "^4.0.11",
       "highlight.js": "^9.12.0",
+      "jsonfile": "^4.0.0",
       "lru-cache": "^4.1.3",
       "micro": "^9.3.3",
       "micro-dev": "^3.0.0",
@@ -50,6 +51,7 @@ npm manifest:
       "showdown-prettify": "^1.3.0",
       "showdown-twitter": "^1.1.0",
       "showdown-youtube": "^1.2.1",
+      "unslug": "^0.1.0",
       "url": "^0.11.0"
     }
   }
@@ -673,7 +675,7 @@ Lockfile:
       once "^1.3.0"
       path-is-absolute "^1.0.0"
   
-  graceful-fs@^4.1.2:
+  graceful-fs@^4.1.2, graceful-fs@^4.1.6:
     version "4.1.11"
     resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
   
@@ -922,6 +924,12 @@ Lockfile:
   json-stringify-safe@^5.0.1:
     version "5.0.1"
     resolved "https://registry.yarnpkg.com/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz#1296a2d58fd45f19a0f6ce01d65701e2c735b6eb"
+  
+  jsonfile@^4.0.0:
+    version "4.0.0"
+    resolved "https://registry.yarnpkg.com/jsonfile/-/jsonfile-4.0.0.tgz#8771aae0799b64076b76640fca058f9c10e33ecb"
+    optionalDependencies:
+      graceful-fs "^4.1.6"
   
   kind-of@^3.0.2, kind-of@^3.0.3, kind-of@^3.2.0:
     version "3.2.2"
@@ -1762,6 +1770,10 @@ Lockfile:
     dependencies:
       has-value "^0.3.1"
       isobject "^3.0.0"
+  
+  unslug@^0.1.0:
+    version "0.1.0"
+    resolved "https://registry.yarnpkg.com/unslug/-/unslug-0.1.0.tgz#32605a7dd6789f4346ba18538dee9098b1cb38a2"
   
   upath@^1.0.0:
     version "1.1.0"
