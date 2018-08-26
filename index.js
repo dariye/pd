@@ -6,7 +6,7 @@
  * [x] Migrate all content from blog.pauldariye.com
  * [] Add night theme
  * [x] Add progress indicator for posts
- * [x] Add view counter
+ * [ ] Add view counter
  * [] Add ga
  * [] a11y
  * [] audio/media/image styles --- keep it simple .. black/white/monotone --
@@ -17,6 +17,10 @@
  * [] add twitter, github, icons
  * [] Code snippet copy to clipboard
  * [] Add hearts
+ * [] Copy code snippet
+ * 
+ * micro-site features
+ * [] custom styles for general layout and code
  */
 
 const fs = require('fs')
@@ -58,6 +62,22 @@ const relativePathExtension = function (path) {
 const relativeExtension = new relativePathExtension()
 showdown.extension('relative', relativeExtension.extension)
 
+const videoExtension = function () {
+  return [
+    {
+      type: 'lang',
+      filter: function (text, converter, options) {
+        const regex = /!\[[^\]]*\]\(.*?\.(?:mp4).*?(?=\"|\))(\".*\")?\)/g
+        const matches = regex.exec(text)
+        console.log(matches)
+        return text
+      }
+    }
+  ]
+}
+
+showdown.extension('video', videoExtension)
+
 showdown.extension('codehighlight', function() {
   function htmlunencode(text) {
     return (
@@ -92,11 +112,7 @@ const converter = new showdown.Converter({
   openLinksInNewWindow: true,
   smartIndentationFix: true,
   smoothLivePreview: true,
-  excludeTrailingPunctuationFromURLs: true,
-  tasklists: true,
-  disableForced4SpacesIndentedSublists: true,
-  requireSpaceBeforeHeadingText: true,
-  extensions: ['youtube', 'relative', 'codehighlight']
+  extensions: ['youtube', 'relative', 'codehighlight', 'video']
 })
 converter.setFlavor('github')
 
